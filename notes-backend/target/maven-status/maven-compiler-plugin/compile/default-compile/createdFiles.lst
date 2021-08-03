@@ -1,0 +1,11 @@
+com\henriquesbraga\notesbackend\services\RequestService.class
+com\henriquesbraga\notesbackend\services\exceptions\DataIntegrityException.class
+com\henriquesbraga\notesbackend\NotesBackendApplication.class
+com\henriquesbraga\notesbackend\dtos\NewNoteDTO.class
+com\henriquesbraga\notesbackend\services\seed\NoteSeed.class
+com\henriquesbraga\notesbackend\repositories\NoteRepository.class
+com\henriquesbraga\notesbackend\services\NoteService.class
+com\henriquesbraga\notesbackend\entities\Note.class
+com\henriquesbraga\notesbackend\dtos\NoteDTO.class
+com\henriquesbraga\notesbackend\controllers\NoteController.class
+com\henriquesbraga\notesbackend\services\exceptions\ObjectNotFoundException.class

@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-NotesBackendApplication<notes-backend>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "mainClass": "com.henriquesbraga.notesbackend.NotesBackendApplication",
+      "projectName": "notes-backend",
+      "args": ""
+    }
+  ]
+}

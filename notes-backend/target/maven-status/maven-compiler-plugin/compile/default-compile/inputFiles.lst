@@ -1,0 +1,11 @@
+C:\Users\henri\AndroidStudioProjects\android-notes-app-backend-master\notes-backend\src\main\java\com\henriquesbraga\notesbackend\dtos\NoteDTO.java
+C:\Users\henri\AndroidStudioProjects\android-notes-app-backend-master\notes-backend\src\main\java\com\henriquesbraga\notesbackend\NotesBackendApplication.java
+C:\Users\henri\AndroidStudioProjects\android-notes-app-backend-master\notes-backend\src\main\java\com\henriquesbraga\notesbackend\services\NoteService.java
+C:\Users\henri\AndroidStudioProjects\android-notes-app-backend-master\notes-backend\src\main\java\com\henriquesbraga\notesbackend\services\RequestService.java
+C:\Users\henri\AndroidStudioProjects\android-notes-app-backend-master\notes-backend\src\main\java\com\henriquesbraga\notesbackend\services\seed\NoteSeed.java
+C:\Users\henri\AndroidStudioProjects\android-notes-app-backend-master\notes-backend\src\main\java\com\henriquesbraga\notesbackend\controllers\NoteController.java
+C:\Users\henri\AndroidStudioProjects\android-notes-app-backend-master\notes-backend\src\main\java\com\henriquesbraga\notesbackend\dtos\NewNoteDTO.java
+C:\Users\henri\AndroidStudioProjects\android-notes-app-backend-master\notes-backend\src\main\java\com\henriquesbraga\notesbackend\entities\Note.java
+C:\Users\henri\AndroidStudioProjects\android-notes-app-backend-master\notes-backend\src\main\java\com\henriquesbraga\notesbackend\repositories\NoteRepository.java
+C:\Users\henri\AndroidStudioProjects\android-notes-app-backend-master\notes-backend\src\main\java\com\henriquesbraga\notesbackend\services\exceptions\ObjectNotFoundException.java
+C:\Users\henri\AndroidStudioProjects\android-notes-app-backend-master\notes-backend\src\main\java\com\henriquesbraga\notesbackend\services\exceptions\DataIntegrityException.java
