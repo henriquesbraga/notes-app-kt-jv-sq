@@ -3,14 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/henri/AndroidStudioProjects/Kotlin-Java-Notes-App/NotesAppKtSQ/app/src/main/res/layout/activity_editor.xml" value="0.19739583333333333" />
-        <entry key="..\:/Users/henri/AndroidStudioProjects/Kotlin-Java-Notes-App/NotesAppKtSQ/app/src/main/res/layout/activity_main.xml" value="0.19739583333333333" />
-        <entry key="..\:/Users/henri/AndroidStudioProjects/Kotlin-Java-Notes-App/NotesAppKtSQ/app/src/main/res/layout/item_note.xml" value="0.19739583333333333" />
-        <entry key="..\:/Users/henri/AndroidStudioProjects/NotesAppKtSQ/app/src/main/res/drawable/ic_add.xml" value="0.37864583333333335" />
-        <entry key="..\:/Users/henri/AndroidStudioProjects/NotesAppKtSQ/app/src/main/res/layout/activity_editor.xml" value="0.3625" />
-        <entry key="..\:/Users/henri/AndroidStudioProjects/NotesAppKtSQ/app/src/main/res/layout/activity_main.xml" value="0.3484375" />
-        <entry key="..\:/Users/henri/AndroidStudioProjects/NotesAppKtSQ/app/src/main/res/layout/item_note.xml" value="0.3625" />
-        <entry key="..\:/Users/henri/AndroidStudioProjects/NotesAppKtSQ/app/src/main/res/menu/menu_editor.xml" value="0.3625" />
+        <entry key="app/src/main/res/layout/activity_editor.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/menu/menu_editor.xml" value="0.24895833333333334" />
       </map>
     </option>
   </component>

@@ -1,17 +1,9 @@
 package com.henriquesbraga.notesappktsq.model
 
-class Note(
-    id: Int?,
-    title: String,
-    note: String,
-    color: Int
-) {
-
-    var id = id
-    var title = title
-    var note = note
-    var color = color
-    var date = ""
-
-
-}
+data class Note(
+    val id: Int? = null,
+    val title: String = "",
+    val note: String = "",
+    val color: Int = -1,
+    val date: String = ""
+)

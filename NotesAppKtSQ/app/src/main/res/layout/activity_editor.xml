@@ -15,7 +15,7 @@
         android:layout_marginTop="20dp">
 
         <EditText
-            android:id="@+id/et_title"
+            android:id="@+id/title_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/to_do"
@@ -24,8 +24,8 @@
             tools:ignore="Autofill" />
 
         <EditText
-            android:id="@+id/et_note"
-            android:layout_below="@+id/et_title"
+            android:id="@+id/note_edit_text"
+            android:layout_below="@+id/title_edit_text"
             android:hint="@string/enter_note"
             android:inputType="textMultiLine"
             android:minLines="6"
@@ -37,8 +37,8 @@
             />
 
         <com.thebluealliance.spectrum.SpectrumPalette
-            android:id="@+id/palette"
-            android:layout_below="@id/et_note"
+            android:id="@+id/palette_view"
+            android:layout_below="@id/note_edit_text"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
@@ -50,6 +50,7 @@
             android:id="@+id/progress_circular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"/>
     </RelativeLayout>

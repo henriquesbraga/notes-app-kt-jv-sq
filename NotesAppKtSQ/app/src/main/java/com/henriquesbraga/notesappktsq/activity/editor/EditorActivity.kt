@@ -1,96 +1,86 @@
 package com.henriquesbraga.notesappktsq.activity.editor
 
-import android.app.AlertDialog
-import android.content.DialogInterface
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.core.view.isVisible
+import androidx.appcompat.app.AppCompatActivity
+import com.henriquesbraga.notesappktsq.NotesApplication
 import com.henriquesbraga.notesappktsq.R
+import com.henriquesbraga.notesappktsq.databinding.ActivityEditorBinding
 import com.henriquesbraga.notesappktsq.model.Note
-import kotlinx.android.synthetic.main.activity_editor.*
 
-class EditorActivity : AppCompatActivity(), EditorView {
+class EditorActivity : AppCompatActivity(), EditorContract.View{
 
+    private lateinit var view: EditorView
     private lateinit var presenter: EditorPresenter
-    private lateinit var progressbar: ProgressBar
+    private lateinit var note: Note
     var actionMenu: Menu? = null
-    private var id = 0
-    private var title = ""
-    private var note = ""
-    private var color = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_editor)
 
-        palette.setOnColorSelectedListener { color = it }
+        view = EditorView(ActivityEditorBinding.inflate(layoutInflater))
 
-        //progress bar
-        progressbar = progress_circular
-        hideProgress()
+        setContentView(view.root)
+
+        val noteRepository = (applicationContext as NotesApplication).noteRepository
 
         //presenter
-        presenter = EditorPresenter(this, this)
+        presenter = EditorPresenter(this, noteRepository)
 
         //intent from main activity
         val intent = intent
-        id = intent.getIntExtra("id", 0)
-        title = intent.getStringExtra("title").toString()
-        note = intent.getStringExtra("note").toString()
-        color = intent.getIntExtra("color", 0)
 
-        setDataFromIntentExtra()
+        note = Note(
+            id = intent.getIntExtra("id", 0),
+            title = intent.getStringExtra("title").toString(),
+            note = intent.getStringExtra("note").toString(),
+            color = intent.getIntExtra("color", 0)
+        )
 
+        view.setDataFromIntentExtra(note)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         super.onCreateOptionsMenu(menu)
+
         val inflater = menuInflater
+
         inflater.inflate(R.menu.menu_editor, menu)
         actionMenu = menu
 
-        if(id != 0){
-            actionMenu!!.findItem(R.id.edit).isVisible = true
-            actionMenu!!.findItem(R.id.delete).isVisible = true
-            actionMenu!!.findItem(R.id.save).isVisible = false
-            actionMenu!!.findItem(R.id.update).isVisible = false
+        if (menu == null) return true
+
+        if (note.id != 0) {
+            menu.findItem(R.id.edit).isVisible = true
+            menu.findItem(R.id.delete).isVisible = true
+            menu.findItem(R.id.save).isVisible = false
+            menu.findItem(R.id.update).isVisible = false
         } else {
-            actionMenu!!.findItem(R.id.edit).isVisible = false
-            actionMenu!!.findItem(R.id.delete).isVisible = false
-            actionMenu!!.findItem(R.id.save).isVisible = true
-            actionMenu!!.findItem(R.id.update).isVisible = false
+        menu.findItem(R.id.edit).isVisible = false
+        menu.findItem(R.id.delete).isVisible = false
+        menu.findItem(R.id.save).isVisible = true
+        menu.findItem(R.id.update).isVisible = false
         }
+
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val title = et_title.text.toString().trim { it <= ' ' }
-        val note = et_note.text.toString().trim { it <= ' ' }
-        val color = color
-
         return when (item.itemId) {
+            //save
             R.id.save -> {
-                //save
-                when {
-                    title.isEmpty() -> {
-                        et_title.error = "Preencha o titulo"
-                    }
-                    note.isEmpty() -> {
-                        et_note.error = "Preencha a nota"
-                    }
-                    else -> {
-                        var note = Note(null, title, note, color)
-                        presenter.saveNote(note)
-                    }
+                if (view.validateFields()) {
+                    val note = view.createNote()
+                    presenter.saveNote(note)
                 }
                 true
             }
             R.id.edit -> {
-                editMode()
+                //edit
+                view.editMode()
+                supportActionBar!!.title = "Update Note"
                 actionMenu!!.findItem(R.id.edit).isVisible = false
                 actionMenu!!.findItem(R.id.delete).isVisible = false
                 actionMenu!!.findItem(R.id.save).isVisible = false
@@ -99,44 +89,35 @@ class EditorActivity : AppCompatActivity(), EditorView {
             }
             R.id.update -> {
                 //update
-                when {
-                    title.isEmpty() -> {
-                        et_title.error = "Preencha o titulo"
-                    }
-                    note.isEmpty() -> {
-                        et_note.error = "Preencha a nota"
-                    }
-                    else -> {
-                        var note = Note(id, title, note, color)
-                        presenter.updateNote(note)
-                    }
+                if (view.validateFields()) {
+                    val newNote = view.updateNote(note)
+                    presenter.updateNote(newNote)
                 }
                 true
             }
             R.id.delete -> {
-                val alertDialog = AlertDialog.Builder(this)
-                alertDialog.setTitle("Deletar nota")
-                alertDialog.setMessage("Deseja deletar a nota?")
-                alertDialog.setNegativeButton("Sim") { dialog: DialogInterface, which: Int ->
-                    dialog.dismiss()
-                    presenter.deleteNote(id)
-                }
-                alertDialog.setPositiveButton(
-                    "Não"
-                ) { dialog: DialogInterface, wich: Int -> dialog.dismiss() }
-                alertDialog.show()
+                //delete
+                view.deleteNote(note.id!!, object: EditorContract.CallBack{
+                    override fun deleteNote(id: Int) {
+                        removeNote(id)
+                    }
+                })
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
+    fun removeNote(id: Int){
+        presenter.deleteNote(id)
+    }
+
     override fun showProgress() {
-        progressbar.isVisible = true
+        view.showProgress()
     }
 
     override fun hideProgress() {
-        progressbar.isVisible = false
+        view.hideProgress()
     }
 
     override fun onRequestSuccess(message: String?) {
@@ -149,32 +130,5 @@ class EditorActivity : AppCompatActivity(), EditorView {
         Toast.makeText(this@EditorActivity, message, Toast.LENGTH_SHORT).show()
     }
 
-    private fun setDataFromIntentExtra() {
-        if (id != 0) {
-            et_title.setText(title)
-            et_note.setText(note)
-            palette.setSelectedColor(color)
-            supportActionBar!!.title = "Update Note"
-            readMode()
-        } else {
-            //default color setup
-            palette.setSelectedColor(resources.getColor(R.color.white))
-            color = resources.getColor(R.color.white)
-            editMode()
-        }
-    }
-
-    private fun editMode() {
-        et_title.isFocusableInTouchMode = true
-        et_note.isFocusableInTouchMode = true
-        palette.isEnabled = true
-    }
-
-    private fun readMode() {
-        et_title.isFocusableInTouchMode = false
-        et_note.isFocusableInTouchMode = false
-        et_title.isFocusable = false
-        et_note.isFocusable = false
-        palette.isEnabled = false
-    }
 }
+

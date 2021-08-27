@@ -1,23 +1,21 @@
 package com.henriquesbraga.notesappktsq.activity.main
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.henriquesbraga.notesappktsq.R
+import com.henriquesbraga.notesappktsq.NotesApplication
 import com.henriquesbraga.notesappktsq.activity.editor.EditorActivity
 import com.henriquesbraga.notesappktsq.activity.main.adapter.ItemClickListener
 import com.henriquesbraga.notesappktsq.activity.main.adapter.MainAdapter
+import com.henriquesbraga.notesappktsq.databinding.ActivityMainBinding
 import com.henriquesbraga.notesappktsq.model.Note
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MainView {
 
-    companion object{
+    companion object {
         private const val INTENT_EDIT = 200
         private const val INTENT_ADD = 100
     }
@@ -28,24 +26,25 @@ class MainActivity : AppCompatActivity(), MainView {
 
     var listNotes: ArrayList<Note> = arrayListOf()
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        //1 - get Recycler view
-        var recycler = findViewById<RecyclerView>(R.id.recycler_view)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
 
         //2 - set layout
-        recycler.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
         //Button to create new note
-        add.setOnClickListener{
+        binding.addButton.setOnClickListener {
             startActivityForResult(Intent(this, EditorActivity::class.java), INTENT_ADD)
         }
 
         //swipe gesture
-        swipe_refresh.setOnRefreshListener { presenter.getData() }
-
+        binding.swipeRefresh.setOnRefreshListener { presenter.getData() }
 
         itemClickListener = object : ItemClickListener {
             override fun onItemClick(view: View?, position: Int) {
@@ -63,34 +62,34 @@ class MainActivity : AppCompatActivity(), MainView {
             }
         }
 
+        val noteRepository = (applicationContext as NotesApplication).noteRepository
+
         //Presenter
-        presenter = MainPresenter(this, this)
+        presenter = MainPresenter(this, noteRepository)
         presenter.getData()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == INTENT_ADD && resultCode == RESULT_OK){
+        if (requestCode == INTENT_ADD && resultCode == RESULT_OK) {
             presenter.getData()
-        }
-        else if(requestCode == INTENT_EDIT && resultCode == RESULT_OK){
+        } else if (requestCode == INTENT_EDIT && resultCode == RESULT_OK) {
             presenter.getData()
         }
     }
 
     override fun showLoading() {
-        swipe_refresh.isRefreshing = true
+        binding.swipeRefresh.isRefreshing = true
     }
 
     override fun hideLoading() {
-        swipe_refresh.isRefreshing = false
+        binding.swipeRefresh.isRefreshing = false
     }
 
     override fun onGetResult(notes: ArrayList<Note>) {
         adapter = MainAdapter(this, notes, itemClickListener)
-        recycler_view.adapter = adapter
+        binding.recyclerView.adapter = adapter
         listNotes = notes
-
     }
 
     override fun onErrorLoading(message: String) {
