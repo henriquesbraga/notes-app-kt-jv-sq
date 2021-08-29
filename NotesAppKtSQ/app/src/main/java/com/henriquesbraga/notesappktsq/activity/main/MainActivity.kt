@@ -13,38 +13,39 @@ import com.henriquesbraga.notesappktsq.activity.main.adapter.MainAdapter
 import com.henriquesbraga.notesappktsq.databinding.ActivityMainBinding
 import com.henriquesbraga.notesappktsq.model.Note
 
-class MainActivity : AppCompatActivity(), MainView {
+class MainActivity : AppCompatActivity(), MainContract.View {
 
+    //consts
     companion object {
         private const val INTENT_EDIT = 200
         private const val INTENT_ADD = 100
     }
 
+    private lateinit var view: MainView
     private lateinit var presenter: MainPresenter
     private lateinit var adapter: MainAdapter
     private lateinit var itemClickListener: ItemClickListener
 
     var listNotes: ArrayList<Note> = arrayListOf()
 
-    private lateinit var binding: ActivityMainBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        view = MainView(ActivityMainBinding.inflate(layoutInflater))
+        setContentView(view.root)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        //layout da lista
+        view.setLayout()
 
-        setContentView(binding.root)
+        //handler do swipe e button
+        view.elementsListener(object: MainContract.MainCallBack{
+            override fun getDataFromRepository() {
+                getData()
+            }
 
-        //2 - set layout
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
-
-        //Button to create new note
-        binding.addButton.setOnClickListener {
-            startActivityForResult(Intent(this, EditorActivity::class.java), INTENT_ADD)
-        }
-
-        //swipe gesture
-        binding.swipeRefresh.setOnRefreshListener { presenter.getData() }
+            override fun startActivityFromButton() {
+                startActivity()
+            }
+        })
 
         itemClickListener = object : ItemClickListener {
             override fun onItemClick(view: View?, position: Int) {
@@ -79,20 +80,30 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     override fun showLoading() {
-        binding.swipeRefresh.isRefreshing = true
+        view.showLoading()
     }
 
     override fun hideLoading() {
-        binding.swipeRefresh.isRefreshing = false
+        view.hideLoading()
+    }
+
+    override fun onErrorLoading(message: String) {
+        view.onErrorLoading(message)
     }
 
     override fun onGetResult(notes: ArrayList<Note>) {
         adapter = MainAdapter(this, notes, itemClickListener)
-        binding.recyclerView.adapter = adapter
+        view.onGetResult(adapter)
         listNotes = notes
     }
 
-    override fun onErrorLoading(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    fun getData(){
+        presenter.getData()
     }
+
+    fun startActivity(){
+        startActivityForResult(Intent(this, EditorActivity::class.java), INTENT_ADD)
+    }
+
+
 }

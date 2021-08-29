@@ -5,7 +5,7 @@ import com.henriquesbraga.notesappktsq.repository.DatabaseHelper
 import com.henriquesbraga.notesappktsq.repository.NoteRepository
 
 class MainPresenter(
-    private val view: MainView,
+    private val view: MainContract.View,
     private val noteRepository: NoteRepository
 ) {
 

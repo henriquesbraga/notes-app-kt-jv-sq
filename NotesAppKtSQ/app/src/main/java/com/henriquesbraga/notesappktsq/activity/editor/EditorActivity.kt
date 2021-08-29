@@ -22,6 +22,7 @@ class EditorActivity : AppCompatActivity(), EditorContract.View{
 
         view = EditorView(ActivityEditorBinding.inflate(layoutInflater))
 
+
         setContentView(view.root)
 
         val noteRepository = (applicationContext as NotesApplication).noteRepository
