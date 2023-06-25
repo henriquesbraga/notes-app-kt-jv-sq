@@ -17,11 +17,14 @@ class EditorActivity : AppCompatActivity(), EditorContract.View{
     private lateinit var note: Note
     var actionMenu: Menu? = null
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         view = EditorView(ActivityEditorBinding.inflate(layoutInflater))
 
+        supportActionBar?.title = "Editar ou Salvar"
 
         setContentView(view.root)
 

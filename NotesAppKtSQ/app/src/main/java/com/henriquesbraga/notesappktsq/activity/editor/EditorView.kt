@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.view.View
 import androidx.annotation.ColorRes
 import androidx.core.view.isVisible
+import com.henriquesbraga.notesappktsq.R
 import com.henriquesbraga.notesappktsq.databinding.ActivityEditorBinding
 import com.henriquesbraga.notesappktsq.model.Note
 
@@ -18,6 +19,7 @@ class EditorView(private val binding: ActivityEditorBinding) {
 
     init {
         binding.paletteView.setOnColorSelectedListener { selectedColor = it }
+        binding.paletteView.setSelectedColor(binding.root.resources.getColor(R.color.white))
     }
 
     fun showProgress() {

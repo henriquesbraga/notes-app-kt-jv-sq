@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">NotesAppKtSQ</string>
+    <string name="app_name">Suas Notas</string>
     <string name="plus">+</string>
-    <string name="to_do">To do</string>
-    <string name="enter_note">Enter a note...</string>
-    <string name="save">Save</string>
+    <string name="to_do">Título</string>
+    <string name="enter_note">Digite o texto</string>
+    <string name="save">Salvar</string>
     <string name="date">28/03/2021</string>
     <string name="edit">Editar</string>
     <string name="delete">Deletar</string>

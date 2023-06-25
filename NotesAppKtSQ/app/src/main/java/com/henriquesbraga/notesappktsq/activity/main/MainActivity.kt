@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.henriquesbraga.notesappktsq.NotesApplication
 import com.henriquesbraga.notesappktsq.activity.editor.EditorActivity
@@ -32,6 +33,9 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         super.onCreate(savedInstanceState)
         view = MainView(ActivityMainBinding.inflate(layoutInflater))
         setContentView(view.root)
+
+        supportActionBar?.title = "Suas Notas"
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         //layout da lista
         view.setLayout()

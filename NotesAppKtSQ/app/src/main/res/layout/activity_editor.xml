@@ -21,7 +21,10 @@
             android:hint="@string/to_do"
             android:inputType="textCapSentences"
             android:textSize="25sp"
-            tools:ignore="Autofill" />
+            tools:ignore="Autofill"
+            android:background="@drawable/textview_bg"
+            android:paddingLeft="4dp"
+            android:elevation="4dp"/>
 
         <EditText
             android:id="@+id/note_edit_text"
@@ -34,6 +37,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:ignore="Autofill"
+            android:background="@drawable/textview_bg"
+            android:padding="4dp"
+            android:elevation="4dp"
             />
 
         <com.thebluealliance.spectrum.SpectrumPalette
@@ -44,6 +50,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:spectrum_colors="@array/demo_colors"
+            android:background="@drawable/palete_bg"
+            android:elevation="4dp"
             />
 
         <ProgressBar

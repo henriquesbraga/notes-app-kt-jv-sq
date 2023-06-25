@@ -27,8 +27,7 @@
         android:backgroundTint="@color/purple_500"
         android:contentDescription="@string/plus"
         android:src="@drawable/ic_add"
-        app:backgroundTint="@color/black"
-        app:borderWidth="1dp"
+        app:borderWidth="0dp"
         app:rippleColor="@color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
