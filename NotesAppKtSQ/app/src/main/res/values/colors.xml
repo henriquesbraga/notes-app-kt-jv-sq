@@ -8,7 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="paletebg">#FFd5b4fd</color>
+    <color name="paletebg">#FFf0f8ff</color>
 
     <!--color palete-->
     <color name="blue">#7ec4ed</color>
@@ -16,6 +16,7 @@
     <color name="pink">#ed579a</color>
     <color name="green">#2aed76</color>
     <color name="brown">#f0d3a4</color>
+    <color name="purple">#d5b4fd</color>
 
 
     <array name="demo_colors">
@@ -25,5 +26,6 @@
         <item>@color/pink</item>
         <item>@color/green</item>
         <item>@color/brown</item>
+        <item>@color/purple</item>
     </array>
 </resources>
