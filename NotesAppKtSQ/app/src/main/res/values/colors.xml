@@ -8,16 +8,24 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="paletebg">#FFf0f8ff</color>
+    <color name="textview_bg">#f2f2f2</color>
+    <color name="textview_bg_border_color">@color/purple_700</color>
+    <color name="fab_bg">@color/purple_500</color>
+
 
     <!--color palete-->
+    <color name="paletebg">@color/white</color>
     <color name="blue">#7ec4ed</color>
     <color name="yellow">#d0fc7d</color>
     <color name="pink">#ed579a</color>
     <color name="green">#2aed76</color>
     <color name="brown">#f0d3a4</color>
     <color name="purple">#d5b4fd</color>
-
+    <color name="orange">#ffa500</color>
+    <color name="red">#ff9999</color>
+    <color name="teal">#00cccc</color>
+    <color name="gray">#808080</color>
+    <color name="magenta">#ff80ff</color>
 
     <array name="demo_colors">
         <item>@color/white</item>
@@ -27,5 +35,11 @@
         <item>@color/green</item>
         <item>@color/brown</item>
         <item>@color/purple</item>
+
+        <item>@color/orange</item>
+        <item>@color/red</item>
+        <item>@color/teal</item>
+        <item>@color/gray</item>
+        <item>@color/magenta</item>
     </array>
 </resources>

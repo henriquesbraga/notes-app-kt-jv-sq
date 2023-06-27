@@ -48,6 +48,7 @@
       android:layout_marginBottom="20dp"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+        android:paddingVertical="8dp"
       app:spectrum_colors="@array/demo_colors"
       android:background="@drawable/palete_bg"
       android:elevation="4dp" />
