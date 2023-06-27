@@ -1,5 +1,6 @@
 package com.henriquesbraga.notesappktsq.repository
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import com.henriquesbraga.notesappktsq.model.Note
 import com.henriquesbraga.notesappktsq.repository.constants.DatabaseConstants
@@ -9,6 +10,7 @@ import java.util.Date
 class NoteRepository(private val databaseHelper: DatabaseHelper) {
 
     //Retorna a lista com as notas
+    @SuppressLint("Range")
     fun getAll(): ArrayList<Note> {
         val list: ArrayList<Note> = arrayListOf()
 
