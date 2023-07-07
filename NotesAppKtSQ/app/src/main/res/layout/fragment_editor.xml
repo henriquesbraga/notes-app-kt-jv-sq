@@ -23,7 +23,7 @@
       android:textSize="25sp"
       tools:ignore="Autofill"
       android:background="@drawable/textview_bg"
-      android:paddingLeft="4dp"
+      android:padding="4dp"
       android:elevation="4dp"/>
 
     <EditText
@@ -48,7 +48,7 @@
       android:layout_marginBottom="20dp"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-        android:paddingVertical="8dp"
+      android:paddingVertical="8dp"
       app:spectrum_colors="@array/demo_colors"
       android:background="@drawable/palete_bg"
       android:elevation="4dp" />
@@ -58,8 +58,10 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:visibility="gone"
+      android:layout_below="@id/palette_view"
       android:layout_centerVertical="true"
       android:layout_centerHorizontal="true"/>
+
   </RelativeLayout>
 
 </androidx.core.widget.NestedScrollView>
